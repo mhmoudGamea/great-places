@@ -2,9 +2,9 @@
 
 A new Flutter project.
 
-in this app i learn
-
 ##### screenshots about this app in demo screenshot folder
+
+in this app i learn
 
 - too many packages [image picker package] to be able to take pictures with the camera and show this picked image in a container for review, i use an XFile instead of     using PickedFile as the documentation say (https://pub.dev/packages/image_picker 'image picker readme file'), i also learn how to convert an XFile to File and that       images are saved on the database as Files and when you want to display it you can use Image.file
 
