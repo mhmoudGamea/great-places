@@ -15,7 +15,14 @@ class PlaceDetailScreen extends StatelessWidget {
     final String id = ModalRoute.of(context)!.settings.arguments as String;
     final selectedPlace = Provider.of<GreatPlacesProvider>(context, listen: false).findById(id);
     return Scaffold(
-      appBar: AppBar(title: MyText(text: selectedPlace.title)),
+      appBar: AppBar(
+          automaticallyImplyLeading: false,
+          leading: IconButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              icon: const Icon(Icons.arrow_back_ios_new_rounded, size: 20)),
+          title: MyText(text: selectedPlace.title)),
       body: Column(
         children: [
           SizedBox(
