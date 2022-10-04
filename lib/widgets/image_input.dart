@@ -32,14 +32,19 @@ class _ImageInputState extends State<ImageInput> {
       _storedImage = File(photo.path); // here you convert the 'XFile' to 'File'
     });
 
-    Directory appDocDir =
-        await sys_path.getApplicationDocumentsDirectory(); // path to directory that hold the image
+
+    Directory? appDocDir;
+    try {
+      appDocDir = await sys_path.getApplicationDocumentsDirectory(); // path to directory that hold the image
+    }on sys_path.MissingPlatformDirectoryException catch(ex) {
+      debugPrint(ex.toString());
+    }
 
     final fileName = path.basename(photo.path); // name.jpg for example
 
 // photo is from XFile type so i need to convert it to File type to get to copy method
     final savedImage =
-        await File(photo.path).copy('${appDocDir.path}/$fileName}'); // path of dir + name.jpg
+        await File(photo.path).copy('${appDocDir!.path}/$fileName}'); // path of dir + name.jpg
 
     widget.onSelectedImage(savedImage);
   }
