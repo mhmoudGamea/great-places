@@ -15,3 +15,4 @@ in this app i learn
 - [google_maps_flutter] i need this package to show the google map because unfortunately i have no pilling account to use google maps api and showing the marker
 
 - [geocoding] it's the same idea in android about how to convert (address to lat and long which is called geocoding) & convert (lat and long to address which is called     reverse geocoding)
+- adding new feature to select image by picking it by camera or gallery
