@@ -19,10 +19,10 @@ class ImageInput extends StatefulWidget {
 class _ImageInputState extends State<ImageInput> {
   File? _storedImage;
 
-  Future<void> _takePicture() async {
+  Future<void> _takePicFromCameraOrGallery(ImageSource source) async {
     ImagePicker picker = ImagePicker();
     final XFile? photo = await picker.pickImage(
-        source: ImageSource.camera,
+        source: source,
         maxWidth: 600,
         imageQuality: 100); // note that : here you get an XFile not just a File
 
@@ -44,9 +44,29 @@ class _ImageInputState extends State<ImageInput> {
 
 // photo is from XFile type so i need to convert it to File type to get to copy method
     final savedImage =
-        await File(photo.path).copy('${appDocDir!.path}/$fileName}'); // path of dir + name.jpg
+    await File(photo.path).copy('${appDocDir!.path}/$fileName}'); // path of dir + name.jpg
 
     widget.onSelectedImage(savedImage);
+  }
+  Future<void> _takePicture() async {
+    showDialog(context: context, builder: (context) => AlertDialog(
+      title: MyText(text: 'Choose', color: Colors.blueGrey, size: 17,),
+      content: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          IconButton(icon: Icon(Icons.camera, color: Colors.purple[200],), onPressed: () async{
+            await _takePicFromCameraOrGallery(ImageSource.camera);
+            // ignore: use_build_context_synchronously
+            Navigator.of(context).pop();
+          }),
+          IconButton(icon: Icon(Icons.image_rounded, color: Colors.purple[200],), onPressed: () async{
+            await _takePicFromCameraOrGallery(ImageSource.gallery);
+            // ignore: use_build_context_synchronously
+            Navigator.of(context).pop();
+          }),
+        ],
+      ),
+    ));
   }
 
   @override
@@ -76,14 +96,10 @@ class _ImageInputState extends State<ImageInput> {
           width: 10,
         ),
         Expanded(
-          child: ElevatedButton.icon(
+          child: ElevatedButton(
             onPressed: _takePicture,
-            icon: const Icon(
-              Icons.camera,
-              size: 20,
-            ),
             style: ElevatedButton.styleFrom(primary: Colors.purple[200]),
-            label: MyText(
+            child: MyText(
               text: 'Take a pic',
               letterSpace: 0,
               size: 17,
@@ -94,3 +110,6 @@ class _ImageInputState extends State<ImageInput> {
     );
   }
 }
+/*
+
+ */
