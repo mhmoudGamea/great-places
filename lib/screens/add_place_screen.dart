@@ -130,12 +130,7 @@ class _AddPlaceScreenState extends State<AddPlaceScreen> {
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                   backgroundColor: Colors.purple[200]?.withOpacity(0.7),
                   elevation: 0,
-                  content: MyText(
-                    text: 'One place is added',
-                    color: Colors.white,
-                    size: 17,
-                    letterSpace: 1.3,
-                  )));
+                  content: MyText(text: 'One place is added', letterSpace: 1.3, size: 16,)));
               }
             },
             label: MyText(
